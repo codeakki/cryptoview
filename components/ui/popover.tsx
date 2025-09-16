@@ -34,7 +34,10 @@ function PopoverContent({
           className,
         )}
         {...props}
-      />
+      >
+        {props.children}
+        <PopoverPrimitive.Arrow className="fill-popover stroke-border" width={14} height={7} />
+      </PopoverPrimitive.Content>
     </PopoverPrimitive.Portal>
   )
 }

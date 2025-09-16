@@ -29,13 +29,13 @@ interface ColumnConfig {
 
 const columns: ColumnConfig[] = [
   { key: "watchlist", label: "Watchlist", defaultVisible: true, mobileVisible: true },
-  { key: "rank", label: "Rank", defaultVisible: true, mobileVisible: true },
+  { key: "rank", label: "Rank", defaultVisible: false, mobileVisible: true },
   { key: "name", label: "Name", defaultVisible: true, mobileVisible: true },
   { key: "current_price", label: "Price", defaultVisible: true, mobileVisible: true },
   { key: "price_change_percentage_24h", label: "24h %", defaultVisible: true, mobileVisible: true },
   { key: "price_change_percentage_7d_in_currency", label: "7d %", defaultVisible: true, mobileVisible: false },
-  { key: "market_cap", label: "Market Cap", defaultVisible: true, mobileVisible: false },
-  { key: "total_volume", label: "Volume (24h)", defaultVisible: true, mobileVisible: false },
+  { key: "market_cap", label: "Market Cap", defaultVisible: false, mobileVisible: false },
+  { key: "total_volume", label: "Volume (24h)", defaultVisible: false, mobileVisible: false },
   { key: "chart", label: "7d Chart", defaultVisible: true, mobileVisible: false },
 ]
 
@@ -182,8 +182,13 @@ export function CryptoTable({ coins, loading, onCoinSelect, watchlist, onToggleW
             {!isMobile && (
               <Popover>
                 <PopoverTrigger asChild>
-                  <Button variant="outline" size="sm">
-                    <Settings className="h-4 w-4" />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    aria-label="Table display settings"
+                    className="group transition-transform hover:scale-[1.04] active:scale-[0.98]"
+                  >
+                    <Settings className="h-4 w-4 transition-transform duration-200 group-hover:rotate-90" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-56" align="end">
