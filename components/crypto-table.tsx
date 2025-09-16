@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Star, StarOff, Search, TrendingUp, TrendingDown, Settings } from "lucide-react"
+import { Star, StarOff, Search, TrendingUp, TrendingDown, Settings, ArrowUpDown } from "lucide-react"
 import { Sparkline } from "@/components/sparkline"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -240,7 +240,10 @@ export function CryptoTable({ coins, loading, onCoinSelect, watchlist, onToggleW
                       className="cursor-pointer hover:bg-muted/50 text-right text-sm"
                       onClick={() => handleSort("current_price")}
                     >
-                      Price
+                      <span className="inline-flex items-center justify-end gap-1 w-full">
+                        <span>Price</span>
+                        <ArrowUpDown className="h-3.5 w-3.5 text-muted-foreground" />
+                      </span>
                     </TableHead>
                   )}
                   {visibleColumns.price_change_percentage_24h && (
@@ -248,7 +251,10 @@ export function CryptoTable({ coins, loading, onCoinSelect, watchlist, onToggleW
                       className="cursor-pointer hover:bg-muted/50 text-right text-sm"
                       onClick={() => handleSort("price_change_percentage_24h")}
                     >
-                      24h %
+                      <span className="inline-flex items-center justify-end gap-1 w-full">
+                        <span>24h %</span>
+                        <ArrowUpDown className="h-3.5 w-3.5 text-muted-foreground" />
+                      </span>
                     </TableHead>
                   )}
                   {visibleColumns.price_change_percentage_7d_in_currency && (
@@ -256,7 +262,10 @@ export function CryptoTable({ coins, loading, onCoinSelect, watchlist, onToggleW
                       className="cursor-pointer hover:bg-muted/50 text-right text-sm"
                       onClick={() => handleSort("price_change_percentage_7d_in_currency")}
                     >
-                      7d %
+                      <span className="inline-flex items-center justify-end gap-1 w-full">
+                        <span>7d %</span>
+                        <ArrowUpDown className="h-3.5 w-3.5 text-muted-foreground" />
+                      </span>
                     </TableHead>
                   )}
                   {visibleColumns.market_cap && (
