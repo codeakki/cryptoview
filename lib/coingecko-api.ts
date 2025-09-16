@@ -117,6 +117,13 @@ class CoinGeckoAPI {
     )
   }
 
+  async getMarketsByIds(ids: string[]): Promise<CryptoCurrency[]> {
+    const idsParam = ids.join(',')
+    return this.fetchWithAuth(
+      `/coins/markets?vs_currency=usd&ids=${encodeURIComponent(idsParam)}&sparkline=true&price_change_percentage=7d`,
+    )
+  }
+
   async searchCoins(query: string): Promise<any> {
     return this.fetchWithAuth(`/search?query=${encodeURIComponent(query)}`)
   }

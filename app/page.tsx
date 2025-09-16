@@ -37,40 +37,10 @@ export default function CryptoDashboard() {
 
         setCoins(coinsData)
 
-        // Get trending coin details
+        // Get trending market data (single optimized call)
         const trendingIds = trendingData.coins.slice(0, 15).map((coin) => coin.item.id)
-        const trendingDetails = await Promise.all(trendingIds.map((id) => coinGeckoAPI.getCoinById(id)))
-
-        const trendingCoins = trendingDetails.map((coin) => ({
-          id: coin.id,
-          symbol: coin.symbol,
-          name: coin.name,
-          image: coin.image.small,
-          current_price: coin.market_data.current_price.usd,
-          market_cap: coin.market_data.market_cap.usd,
-          market_cap_rank: coin.market_cap_rank,
-          fully_diluted_valuation: coin.market_data.fully_diluted_valuation?.usd || 0,
-          total_volume: coin.market_data.total_volume.usd,
-          high_24h: coin.market_data.high_24h.usd,
-          low_24h: coin.market_data.low_24h.usd,
-          price_change_24h: coin.market_data.price_change_24h,
-          price_change_percentage_24h: coin.market_data.price_change_percentage_24h,
-          price_change_percentage_7d_in_currency: coin.market_data.price_change_percentage_7d,
-          market_cap_change_24h: coin.market_data.market_cap_change_24h,
-          market_cap_change_percentage_24h: coin.market_data.market_cap_change_percentage_24h,
-          circulating_supply: coin.market_data.circulating_supply,
-          total_supply: coin.market_data.total_supply,
-          max_supply: coin.market_data.max_supply,
-          ath: coin.market_data.ath.usd,
-          ath_change_percentage: coin.market_data.ath_change_percentage.usd,
-          ath_date: coin.market_data.ath_date.usd,
-          atl: coin.market_data.atl.usd,
-          atl_change_percentage: coin.market_data.atl_change_percentage.usd,
-          atl_date: coin.market_data.atl_date.usd,
-          sparkline_in_7d: { price: coin.market_data.sparkline_7d?.price || [] },
-        }))
-
-        setTrending(trendingCoins)
+        const trendingMarkets = await coinGeckoAPI.getMarketsByIds(trendingIds)
+        setTrending(trendingMarkets)
       } catch (error) {
         console.error("Error fetching data:", error)
       } finally {
